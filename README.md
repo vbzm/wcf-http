@@ -18,6 +18,9 @@ venv\Scripts\activate
 
 # 安装依赖
 pip install -U wcf-http-server
+
+# 安装额外依赖systray，服务器在任务栏可见
+pip install -U wcf-http-server[systray]
 ```
 
 ## 运行
@@ -31,16 +34,19 @@ wcfhttp -h
 
 usage: wcfhttp [-h] [-v] [--wcf_host WCF_HOST] [--wcf_port WCF_PORT]
                [--wcf_debug WCF_DEBUG] [--host HOST] [--port PORT] [--cb CB]
+               [--systray]
 
 options:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
   --wcf_host WCF_HOST   WeChatFerry 监听地址，默认本地启动监听 0.0.0.0
   --wcf_port WCF_PORT   WeChatFerry 监听端口 (同时占用 port + 1 端口)，默认 10086
-  --wcf_debug WCF_DEBUG 是否打开 WeChatFerry 调试开关
+  --wcf_debug WCF_DEBUG
+                        是否打开 WeChatFerry 调试开关
   --host HOST           wcfhttp 监听地址，默认监听 0.0.0.0
   --port PORT           wcfhttp 监听端口，默认 9999
   --cb CB               接收消息回调地址
+  --systray             Enable system tray icon
 
 # 忽略新消息运行
 wcfhttp
