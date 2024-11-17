@@ -38,10 +38,8 @@ class Http(FastAPI):
 		self, 
 		wcf: Wcf, 
 		cb: str, 
-		host: str = "127.0.0.1", 
-		port: int = 9999, 
 		**extra: Any
-		) -> None:
+	) -> None:
 		super().__init__(**extra)
 		self.host = host
 		self.port = port
@@ -50,9 +48,6 @@ class Http(FastAPI):
 		self.wcf = wcf
 		self.cb = cb  # Store the callback URL
 		self._set_cb(cb)
-		url = f"http://{self.host}:{self.port}/docs"
-		self.LOG.info(f"Server is running at {url}")
-		print(f"Server is running at {url}")
 		self.add_api_route("/msg_cb", self.msg_cb, methods=["POST"], summary="接收消息回调样例", tags=["示例"])
 
 		# GET Routes

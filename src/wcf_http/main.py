@@ -27,9 +27,13 @@ def main():
 	logging.basicConfig(level="INFO", format="%(asctime)s %(message)s")
 	args = parse.parse_args()
 	cb = args.cb
+	url = f"http://{self.host.replace('0.0.0.0', '127.0.0.1')}:{self.port}/docs"
 	if not cb:
-		logging.warning("没有设置接收消息回调，消息直接通过日志打印；请通过 --cb 设置消息回调")
-		logging.warning(f"回调接口规范参考接收消息回调样例：http://{args.host}:{args.port}/docs")
+		# logging.warning("没有设置接收消息回调，消息直接通过日志打印；请通过 --cb 设置消息回调")
+		logging.warning("没有设置接收消息回调，消息直接通过日志打印；请通过 --cb 或 POST Callback API 设置消息回调")
+		logging.warning(f"回调接口规范参考接收消息回调样例：{url}")
+	# self.LOG.info(f"Server is running at {url}")
+	print(f"Server is running at {url}")
 
 	# Create the log directory as a quick fix for https://github.com/lich0821/WeChatRobot/issues/70
 	# Fixed in https://github.com/lich0821/WeChatFerry/commit/19079bc468fe6681a65887a42a9215a9ec7392d1
@@ -100,7 +104,7 @@ def main():
 
 		# Function to open the documentation webpage
 		def on_open(icon, item):
-			webbrowser.open(f"http://{args.host.replace('0.0.0.0', '127.0.0.1')}:{args.port}/docs")
+			webbrowser.open(url)
 
 		# Function to exit the application
 		def on_exit(icon, item):
