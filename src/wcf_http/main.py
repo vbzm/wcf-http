@@ -27,7 +27,7 @@ def main():
 	logging.basicConfig(level="INFO", format="%(asctime)s %(message)s")
 	args = parse.parse_args()
 	cb = args.cb
-	url = f"http://{self.host.replace('0.0.0.0', '127.0.0.1')}:{self.port}/docs"
+	url = f"http://{args.host.replace('0.0.0.0', '127.0.0.1')}:{args.port}/docs"
 	if not cb:
 		# logging.warning("没有设置接收消息回调，消息直接通过日志打印；请通过 --cb 设置消息回调")
 		logging.warning("没有设置接收消息回调，消息直接通过日志打印；请通过 --cb 或 POST Callback API 设置消息回调")
