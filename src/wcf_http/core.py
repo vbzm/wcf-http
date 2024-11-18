@@ -41,8 +41,6 @@ class Http(FastAPI):
 		**extra: Any
 	) -> None:
 		super().__init__(**extra)
-		self.host = host
-		self.port = port
 		self.LOG = logging.getLogger(__name__)
 		self.LOG.info(f"wcfhttp version: {__version__}")
 		self.wcf = wcf
