@@ -84,7 +84,7 @@ def main():
 		def create_image():
 			# Get the absolute path of the current file's directory
 			current_dir = os.path.dirname(os.path.abspath(__file__))
-			return Image.open(os.path.join(current_dir, "assets", "images", 'wechat-icon-700.png'))
+			return Image.open(os.path.join(current_dir, "assets", "images", 'wcf-http.png'))
 
 		# Global variable to control the server
 		global uvicorn_server
