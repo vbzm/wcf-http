@@ -70,13 +70,19 @@ class Http(FastAPI):
 		self.add_api_route("/pat", self.send_pat_msg, methods=["POST"], summary="发送拍一拍消息")
 		# Deprecated or unimplemented APIs are commented out
 		# self.add_api_route("/xml", self.send_xml, methods=["POST"], summary="发送 XML 消息")
+        # self.add_api_route("/emotion", self.send_emotion, methods=["POST"], summary="发送表情消息")
+        self.add_api_route("/sql", self.query_sql, methods=["POST"], summary="执行 SQL，如果数据量大注意分页，以免 OOM")
+        self.add_api_route("/new-friend", self.accept_new_friend, methods=["POST"], summary="通过好友申请")
+        self.add_api_route("/chatroom-member", self.add_chatroom_members, methods=["POST"], summary="添加群成员")
+        self.add_api_route("/cr-members", self.invite_chatroom_members, methods=["POST"], summary="邀请群成员")
+        self.add_api_route("/transfer", self.receive_transfer, methods=["POST"], summary="接收转账")
 		# self.add_api_route("/dec-image", self.decrypt_image, methods=["POST"], summary="（废弃）解密图片")
-		# self.add_api_route("/attachment", self.download_attachment, methods=["POST"], summary="（废弃）下载图片、文件和视频")
+		self.add_api_route("/attachment", self.download_attachment, methods=["POST"], summary="（废弃）下载图片、文件和视频")
 		self.add_api_route("/save-image", self.download_image, methods=["POST"], summary="下载图片")
 		self.add_api_route("/save-audio", self.get_audio_msg, methods=["POST"], summary="保存语音")
 
 		# DELETE Routes
-		self.add_api_route("/chatroom-member", self.del_chatroom_members, methods=["DELETE"], summary="删除群成员")
+		# self.add_api_route("/chatroom-member", self.del_chatroom_members, methods=["DELETE"], summary="删除群成员")
 
 		# Add routes for dynamic callback URL handling
 		self.add_api_route("/callback", self.get_callback, methods=["GET"], summary="Get the callback URL", tags=["Callback"])
@@ -440,6 +446,41 @@ class Http(FastAPI):
 		"""
 		ret = self.wcf.refresh_pyq(id)
 		return {"status": ret, "message": "成功" if ret == 1 else "失败"}
+
+    def decrypt_image(self,
+                      src: str = Body("C:\\...", description="加密的图片路径，从图片消息中获取"),
+                      dst: str = Body("C:\\...", description="解密的图片路径")) -> dict:
+        """解密图片:
+
+        Args:
+            src (str): 加密的图片路径
+            dst (str): 解密的图片路径
+
+        Returns:
+            bool: 是否成功
+        """
+        ret = self.wcf.decrypt_image(src, dst)
+        return {"status": ret, "message": "成功"if ret else "废弃，请使用 save-image"}
+
+    def download_attachment(self,
+                            id: int = Body("0", description="消息中的id"),
+                            thumb: str = Body("C:/...", description="消息中的 thumb"),
+                            extra: str = Body("C:/...", description="消息中的 extra")) -> dict:
+        """下载附件（图片、视频、文件）
+
+        Args:
+            id (int): 消息中 id
+            thumb (str): 消息中的 thumb
+            extra (str): 消息中的 extra
+
+        Returns:
+            str: 成功返回存储路径；空字符串为失败，原因见日志。
+        """
+        ret = self.wcf.download_attach(id, thumb, extra)
+        if ret:
+            return {"status": 0, "message": "成功", "data": {"path": ret}}
+
+        return {"status": -1, "message": "废弃，请使用 save-image"}
 
 	def download_image(self,
 					   id: int = Body("0", description="消息中的 id"),
