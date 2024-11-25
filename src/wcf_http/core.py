@@ -46,7 +46,6 @@ class Http(FastAPI):
 		self.wcf = wcf
 		self.cb = cb  # Store the callback URL
 		self._set_cb(cb)
-		self.add_api_route("/msg_cb", self.msg_cb, methods=["POST"], summary="接收消息回调样例", tags=["示例"])
 
 		# GET Routes
 		self.add_api_route("/login", self.is_login, methods=["GET"], summary="获取登录状态")
@@ -63,6 +62,7 @@ class Http(FastAPI):
 		self.add_api_route("/ocr-result", self.get_ocr_result, methods=["GET"], summary="获取 OCR 结果")
 
 		# POST Routes
+		self.add_api_route("/msg_cb", self.msg_cb, methods=["POST"], summary="接收消息回调样例", tags=["示例"])
 		self.add_api_route("/text", self.send_text, methods=["POST"], summary="发送文本消息")
 		self.add_api_route("/image", self.send_image, methods=["POST"], summary="发送图片消息")
 		self.add_api_route("/file", self.send_file, methods=["POST"], summary="发送文件消息")
@@ -82,7 +82,7 @@ class Http(FastAPI):
 		self.add_api_route("/save-audio", self.get_audio_msg, methods=["POST"], summary="保存语音")
 
 		# DELETE Routes
-		# self.add_api_route("/chatroom-member", self.del_chatroom_members, methods=["DELETE"], summary="删除群成员")
+		self.add_api_route("/chatroom-member", self.del_chatroom_members, methods=["DELETE"], summary="删除群成员")
 
 		# Add routes for dynamic callback URL handling
 		self.add_api_route("/callback", self.get_callback, methods=["GET"], summary="Get the callback URL", tags=["Callback"])
