@@ -7,7 +7,18 @@
 
 Python HTTP server for [WeChatFerry](https://github.com/lich0821/WeChatFerry) [v39.2.4](https://github.com/lich0821/WeChatFerry/releases/tag/v39.2.4)，适配微信 3.9.10.27 [WeChatSetup-3.9.10.27.exe](https://github.com/lich0821/WeChatFerry/releases/download/v39.2.4/WeChatSetup-3.9.10.27.exe)
 
-## 安装
+## 一键安装与运行（非开发者，新手友好）
+如果你是新手，不知道`pip`是什么，安装下面这两个文件，双击`wcf-http-server`运行就可以了
+1. [WeChat客户端](https://github.com/lich0821/WeChatFerry/releases/download/v39.2.4/WeChatSetup-3.9.10.27.exe)（可能需要卸载已安装版本）
+2. wcf-http-server安装包
+	1. `Install for anyone using this computer`: 右键 -> `Run as administrator`
+	2. `Install just for me`: 直接运行就可以
+
+---
+
+## 开发者
+
+### 安装
 
 ```sh
 # 创建虚拟环境
@@ -23,7 +34,7 @@ pip install -U wcf-http-server
 pip install -U wcf-http-server[systray]
 ```
 
-## 运行
+### 运行
 
 ```sh
 # 查看版本
@@ -55,7 +66,7 @@ wcfhttp
 wcfhttp --cb http://host:port/callback
 ```
 
-## 接收消息回调接口文档
+### 接收消息回调接口文档
 
 参考文档（默认地址为：[http://localhost:9999/docs](http://localhost:9999/docs)）接收消息回调样例。
 
