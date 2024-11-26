@@ -75,7 +75,7 @@ class Http(FastAPI):
 		self.add_api_route("/new-friend", self.accept_new_friend, methods=["POST"], summary="通过好友申请")
 		self.add_api_route("/chatroom-member", self.add_chatroom_members, methods=["POST"], summary="添加群成员")
 		self.add_api_route("/cr-members", self.invite_chatroom_members, methods=["POST"], summary="邀请群成员")
-		self.add_api_route("/transfer", self.receive_transfer, methods=["POST"], summary="接收转账")
+		# self.add_api_route("/transfer", self.receive_transfer, methods=["POST"], summary="接收转账")
 		# self.add_api_route("/dec-image", self.decrypt_image, methods=["POST"], summary="（废弃）解密图片")
 		self.add_api_route("/attachment", self.download_attachment, methods=["POST"], summary="（废弃）下载图片、文件和视频")
 		self.add_api_route("/save-image", self.download_image, methods=["POST"], summary="下载图片")
