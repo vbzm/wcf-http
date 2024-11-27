@@ -11,7 +11,7 @@ Python HTTP server for [WeChatFerry](https://github.com/lich0821/WeChatFerry) [v
 如果你是新手，不知道`pip`是什么，安装下面这两个文件，双击`wcf-http-server`运行就可以了
 1. [WeChat客户端](https://github.com/lich0821/WeChatFerry/releases/download/v39.2.4/WeChatSetup-3.9.10.27.exe)（可能需要卸载已安装版本）
 2. [wcf-http-server安装包](https://github.com/yuxiaoli/wcf-http/releases/download/v39.2.4.1.15/wcf-http-server_39.2.4.1.15.exe)
-	1. 关于安装路径
+	1. 安装路径与权限
 		1. `Install for anyone using this computer:` 右键 -> `Run as administrator`
 		2. `Install just for me:` 直接运行就可以
 
