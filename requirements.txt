@@ -31,3 +31,4 @@ typing-extensions==4.12.2
 urllib3==2.2.3 
 uvicorn==0.23.2 
 wcferry==39.2.4.0 
+pytest==8.3.4
