@@ -76,3 +76,23 @@ wcfhttp --cb http://host:port/callback
 
 更多关于回调的介绍可以参考这篇文章：[回调到底是什么？](https://mp.weixin.qq.com/s?__biz=MzI0MjI1OTk0OQ==&mid=2247487514&idx=1&sn=fbc2275eb1bdf8e28193f2134307a43c&scene=21#wechat_redirect)
 
+## 二次开发
+
+### 安装依赖
+
+```
+pip install -r requirements.txt
+```
+
+### 运行
+
+```
+python src/wcf_http/main.py
+```
+
+### 自动化测试
+
+```
+pip install pytest requests
+pytest tests/test_core_http.py -v
+```
