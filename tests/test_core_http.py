@@ -6,8 +6,8 @@ from typing import Dict
 
 # 测试配置
 BASE_URL = "http://localhost:9999"  # 测试服务器地址
-TEST_ROOM_ID = "5550027590@chatroom"  # 测试群ID
-TEST_WXID = "xxxx"  # 测试用户ID
+TEST_ROOM_ID = "48398681165@chatroom"  # 测试群ID
+TEST_WXID = "filehelper"  # 测试用户ID
 TEST_FILE_PATH = os.path.join(os.path.dirname(__file__), "test_files")  # 测试文件目录
 
 # 创建测试文件目录

@@ -5,24 +5,15 @@
 - GitHub: [https://github.com/yuxiaoli/wcf-http](https://github.com/yuxiaoli/wcf-http)
 - PyPI: [https://pypi.org/project/wcf-http-server/](https://pypi.org/project/wcf-http-server/)
 
-Python HTTP server for [WeChatFerry](https://github.com/lich0821/WeChatFerry) [v39.2.4](https://github.com/lich0821/WeChatFerry/releases/tag/v39.2.4)，适配微信 3.9.10.27 [WeChatSetup-3.9.10.27.exe](https://github.com/lich0821/WeChatFerry/releases/download/v39.2.4/WeChatSetup-3.9.10.27.exe)
+Python HTTP server for [WeChatFerry](https://github.com/lich0821/WeChatFerry) [v39.3.3](https://github.com/lich0821/WeChatFerry/releases/tag/v39.3.3)，适配微信 3.9.11.25 [WeChatSetup-3.9.11.25.exe](https://github.com/lich0821/WeChatFerry/releases/download/v39.3.3/WeChatSetup-3.9.11.25.exe)
 
-## 开箱即用（非开发者）
-如果你是新手，不知道`pip`是什么，安装下面这两个文件，双击`wcf-http-server`运行就可以了
-1. [WeChat客户端](https://github.com/lich0821/WeChatFerry/releases/download/v39.2.4/WeChatSetup-3.9.10.27.exe)（可能需要卸载已安装版本）
-2. [wcf-http-server安装包](https://github.com/yuxiaoli/wcf-http/releases/download/v39.2.4.1.15/wcf-http-server_39.2.4.1.15.exe)
-	1. 安装路径与权限
-		1. `Install for anyone using this computer:` 右键 -> `Run as administrator`
-		2. `Install just for me:` 直接运行就可以
+2025/4/20 更至 wcferry 39.5.1 兼容微信版本：3.9.12.51
 
-wcf-http-server运行以后可以在任务栏看到一个小图标，右键 -> `Open API Docs`会打开一个网页，可以用`POST /callback`接口设置回调。
-更多关于回调的内容请参考：[回调到底是什么？](https://mp.weixin.qq.com/s?__biz=MzI0MjI1OTk0OQ==&mid=2247487514&idx=1&sn=fbc2275eb1bdf8e28193f2134307a43c&scene=21#wechat_redirect)
+## 已知问题
+1. [发送文件后，微信崩溃。](https://github.com/lich0821/WeChatFerry/issues/269) 文件路径不支持中文
+2. 发送富文本消息失败
 
----
-
-## 开发者
-
-### 安装
+## 安装
 
 ```sh
 # 创建虚拟环境
@@ -32,24 +23,20 @@ python -m venv venv
 venv\Scripts\activate
 
 # 安装依赖
-pip install -U wcf-http-server
-
-# 安装额外依赖systray，服务器在任务栏可见
-pip install -U wcf-http-server[systray]
+pip install -r requirements.txt
 ```
 
-### 运行
+## 运行
 
 ```sh
 # 查看版本
-wcfhttp -v
+python src\wcf_http\main.py -v
 
 # 查看帮助
-wcfhttp -h
+python src\wcf_http\main.py -h
 
-usage: wcfhttp [-h] [-v] [--wcf_host WCF_HOST] [--wcf_port WCF_PORT]
-               [--wcf_debug WCF_DEBUG] [--host HOST] [--port PORT] [--cb CB]
-               [--systray]
+usage: main.py [-h] [-v] [--wcf_host WCF_HOST] [--wcf_port WCF_PORT] [--wcf_debug WCF_DEBUG] [--host HOST]
+               [--port PORT] [--cb CB] [--systray]
 
 options:
   -h, --help            show this help message and exit
@@ -64,35 +51,15 @@ options:
   --systray             enable system tray icon
 
 # 忽略新消息运行
-wcfhttp
+python src\wcf_http\main.py
 
 # 新消息转发到指定地址
-wcfhttp --cb http://host:port/callback
+python src\wcf_http\main.py --cb http://host:port/callback
 ```
 
-### 接收消息回调接口文档
+## 接收消息回调接口文档
 
 参考文档（默认地址为：[http://localhost:9999/docs](http://localhost:9999/docs)）接收消息回调样例。
 
 更多关于回调的介绍可以参考这篇文章：[回调到底是什么？](https://mp.weixin.qq.com/s?__biz=MzI0MjI1OTk0OQ==&mid=2247487514&idx=1&sn=fbc2275eb1bdf8e28193f2134307a43c&scene=21#wechat_redirect)
 
-## 二次开发
-
-### 安装依赖
-
-```
-pip install -r requirements.txt
-```
-
-### 运行
-
-```
-python src/wcf_http/main.py
-```
-
-### 自动化测试
-
-```
-pip install pytest requests
-pytest tests/test_core_http.py -v
-```
